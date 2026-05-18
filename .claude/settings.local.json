@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(kubectl *)",
+      "Bash(./scripts/build-image.sh *)",
+      "Bash(./scripts/deploy-k8s.sh *)",
+      "Bash(microk8s ctr *)",
+      "Bash(bash -x ./scripts/deploy-k8s.sh)"
+    ]
+  }
+}

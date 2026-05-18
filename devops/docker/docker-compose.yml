@@ -1,0 +1,18 @@
+services:
+  rag-assistant:
+    image: ${RAG_IMAGE:-rag-assistant:dev}
+    build:
+      context: ../..
+      dockerfile: devops/docker/Dockerfile
+    container_name: rag-assistant
+    environment:
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+    ports:
+      - "${APP_PORT:-8501}:8501"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://127.0.0.1:8501/_stcore/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+    restart: unless-stopped

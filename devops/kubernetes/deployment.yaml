@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rag-assistant
+  labels:
+    app.kubernetes.io/name: rag-assistant
+    app.kubernetes.io/part-of: rag-agent
+spec:
+  replicas: 1
+  revisionHistoryLimit: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: rag-assistant
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: rag-assistant
+        app.kubernetes.io/part-of: rag-agent
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+        - name: rag-assistant
+          image: rag-assistant:dev
+          imagePullPolicy: IfNotPresent
+          envFrom:
+            - secretRef:
+                name: rag-assistant-secret
+          env:
+            - name: MININET_API_URL
+              value: http://mininet-sim:8080
+          ports:
+            - containerPort: 8501
+              name: http
+          readinessProbe:
+            httpGet:
+              path: /_stcore/health
+              port: http
+            initialDelaySeconds: 15
+            periodSeconds: 10
+            timeoutSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /_stcore/health
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 20
+            timeoutSeconds: 5

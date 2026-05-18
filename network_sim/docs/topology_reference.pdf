@@ -1,0 +1,111 @@
+%PDF-1.4
+%‚„œ”
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 5 0 R >> >> /Contents 4 0 R >>
+endobj
+4 0 obj
+<< /Length 1699 >>
+stream
+BT
+/F1 11 Tf
+50 790 Td
+(Topology Reference \(Page 1/1\)) Tj
+0 -16 Td
+(-----------------------------) Tj
+0 -16 Td
+(Topology Brief: Mininet Routers + Switches + Hosts) Tj
+0 -16 Td
+() Tj
+0 -16 Td
+(Node Roles) Tj
+0 -16 Td
+(  r1, r2 : Linux routers \(IP forwarding enabled\)) Tj
+0 -16 Td
+(  s1, s2, s3 : L2 Open vSwitch switches) Tj
+0 -16 Td
+(  h1, h2 : User/client subnet) Tj
+0 -16 Td
+(  h3, h4 : Server subnet) Tj
+0 -16 Td
+() Tj
+0 -16 Td
+(Links) Tj
+0 -16 Td
+(  h1--s1, h2--s1, r1--s1) Tj
+0 -16 Td
+(  r1--s2--r2 \(transit segment\)) Tj
+0 -16 Td
+(  r2--s3, h3--s3, h4--s3) Tj
+0 -16 Td
+() Tj
+0 -16 Td
+(IP Plan) Tj
+0 -16 Td
+(  LAN A:     10.0.1.0/24 \(gateway r1=10.0.1.1\)) Tj
+0 -16 Td
+(  Transit:   10.0.12.0/30 \(r1=10.0.12.1, r2=10.0.12.2\)) Tj
+0 -16 Td
+(  LAN B:     10.0.2.0/24 \(gateway r2=10.0.2.1\)) Tj
+0 -16 Td
+() Tj
+0 -16 Td
+(Routing) Tj
+0 -16 Td
+(  r1 static route: 10.0.2.0/24 via 10.0.12.2) Tj
+0 -16 Td
+(  r2 static route: 10.0.1.0/24 via 10.0.12.1) Tj
+0 -16 Td
+() Tj
+0 -16 Td
+(Security-Relevant Control Points) Tj
+0 -16 Td
+(  1\) Router FORWARD chain: east-west policy enforcement) Tj
+0 -16 Td
+(  2\) Router INPUT chain: control-plane protection) Tj
+0 -16 Td
+(  3\) Sysctl hardening knobs on routers) Tj
+0 -16 Td
+() Tj
+0 -16 Td
+(Implementation Actions Supported by Simulator API) Tj
+0 -16 Td
+(  - baseline hardening \(sysctl + invalid-state drops\)) Tj
+0 -16 Td
+(  - disable/block telnet forwarding \(tcp/23\)) Tj
+0 -16 Td
+(  - block ICMP from h1 to h3) Tj
+0 -16 Td
+() Tj
+0 -16 Td
+(Verification Signals) Tj
+0 -16 Td
+(  - Reachability probe h2->h4 for baseline health) Tj
+0 -16 Td
+(  - Policy probe h1->h3 ICMP expected fail when blocked) Tj
+0 -16 Td
+(  - iptables rule presence checks) Tj
+ET
+endstream
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+xref
+0 6
+0000000000 65535 f 
+0000000015 00000 n 
+0000000064 00000 n 
+0000000121 00000 n 
+0000000247 00000 n 
+0000001998 00000 n 
+trailer
+<< /Size 6 /Root 1 0 R >>
+startxref
+2068
+%%EOF

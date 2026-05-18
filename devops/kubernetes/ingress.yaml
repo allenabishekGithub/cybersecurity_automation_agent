@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: rag-assistant
+  labels:
+    app.kubernetes.io/name: rag-assistant
+    app.kubernetes.io/part-of: rag-agent
+  annotations:
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+    nginx.ingress.kubernetes.io/use-regex: "true"
+spec:
+  ingressClassName: public
+  rules:
+    - http:
+        paths:
+          - path: /rag-agent(/|$)(.*)
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: rag-assistant
+                port:
+                  number: 8501

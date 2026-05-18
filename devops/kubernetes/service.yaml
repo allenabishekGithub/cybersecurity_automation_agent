@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: rag-assistant
+  labels:
+    app.kubernetes.io/name: rag-assistant
+    app.kubernetes.io/part-of: rag-agent
+spec:
+  type: ClusterIP
+  selector:
+    app.kubernetes.io/name: rag-assistant
+  ports:
+    - name: http
+      port: 8501
+      targetPort: http
